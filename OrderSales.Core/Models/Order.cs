@@ -10,7 +10,7 @@ public class Order
     public Customer Customer { get; set; } = null!;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public List<OrderItem> OrderItems { get; set; } = new();
-    public decimal TotalValue { get; set; }
+    public decimal TotalValue { get; set; } //=> OrderItems.Sum(i => i.UnitPrice * i.Amount);
 
     public EStatusType StatusType { get; set; } = EStatusType.Created;
 }

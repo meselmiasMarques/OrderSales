@@ -1,4 +1,5 @@
 ﻿using OrderSales.Api.EndPoints.Customers;
+using OrderSales.Api.EndPoints.Orders;
 using OrderSales.Api.EndPoints.Products;
 using OrderSales.Core.Requests.Customers;
 
@@ -29,6 +30,12 @@ public static class EndPoints
             .MapEndpoint<GetByIdProductEndPoint>();
 
 
+        endpoints.MapGroup("v1/orders")
+            .WithTags("Orders")
+            .MapEndpoint<GetAllOrderEndPoint>()
+            .MapEndpoint<GetByIdOrderEndPoint>()
+            .MapEndpoint<GetOrderByCustomerEndPoint>()
+            .MapEndpoint<CreateOrderEndPoint>();
     }
     private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder app)
         where TEndpoint : IEndPoint

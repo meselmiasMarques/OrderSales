@@ -20,7 +20,7 @@ public class CreateCustomerEndPoint : IEndPoint
 
     private static async Task<IResult> ServiceAsync(
         ICustomerService CustomerService,
-        [FromBody]CustomerCreateRequest request
+        [FromBody] CustomerCreateRequest request
     )
     {
         var validationResults = new List<ValidationResult>();
