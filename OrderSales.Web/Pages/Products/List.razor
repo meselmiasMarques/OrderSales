@@ -1,0 +1,46 @@
+﻿@page "/products/list"
+@inherits ListProductsPage
+
+
+<h3 class="mb-3">Lista de Produtos</h3>
+
+@if (Products is null)
+{
+    <p>🔄 Carregando produtos...</p>
+}
+else if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger">@ErrorMessage</div>
+}
+else if (Products is not null && Products.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Preço (R$)</th>
+                <th>Estoque</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@product.Stock</td>
+                    <td>
+                        <!-- Aqui você pode incluir ações, como editar/deletar -->
+                        <button class="btn btn-sm btn-primary me-2" @onclick="() => EditProduct(product.Id)">✏️ Editar</button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => DeleteProduct(product.Id)">🗑️ Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>⚠️ Nenhum produto encontrado.</p>
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Novo Perfil",
+    "Projects": [
+      {
+        "Path": "OrderSales.Api\\OrderSales.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "OrderSales.Web\\OrderSales.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
