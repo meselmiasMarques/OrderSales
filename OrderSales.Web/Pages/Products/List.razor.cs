@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using OrderSales.Core.Models;
 using OrderSales.Core.Requests.Products;
 using OrderSales.Core.Services;
+using System.Security.Cryptography;
 
 
 namespace OrderSales.Web.Pages.Products
@@ -22,6 +23,8 @@ namespace OrderSales.Web.Pages.Products
         [Inject]
         public IProductService ProductService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         #endregion
         protected override async Task OnInitializedAsync()
@@ -61,6 +64,11 @@ namespace OrderSales.Web.Pages.Products
         {
             // Lógica para exclusão
             // Pode abrir um modal de confirmação
+        }
+
+        public void CreateProduct()
+        {
+            NavigationManager.NavigateTo("/products/create");
         }
     }
 }

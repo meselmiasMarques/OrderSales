@@ -22,6 +22,9 @@ namespace OrderSales.Web.Services
 
         public async Task<Response<Product?>> DeleteAsync(ProductDeleteRequest request)
         {
+            var result = await _client.DeleteAsync($"v1/products/{request.Id}");
+
+            //implemntar o retorno correto
             throw new NotImplementedException();
         }
 
@@ -31,6 +34,8 @@ namespace OrderSales.Web.Services
         
         public async Task<Response<Product?>> GetByIdAsync(ProductGetByIdRequest request)
         {
+            var result = await _client.GetFromJsonAsync<Response<Product?>>($"v1/products/{request.Id}");
+            //implemntar o retorno correto
             throw new NotImplementedException();
         }
 

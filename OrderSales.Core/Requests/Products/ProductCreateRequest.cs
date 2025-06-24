@@ -4,8 +4,8 @@ namespace OrderSales.Core.Requests.Products;
 
 public class ProductCreateRequest
 {
-    [MaxLength(100, ErrorMessage = "Máximo 100 caracteres")]
-    [Required(ErrorMessage = "Campo Nome obrigatório")]
+    //[MaxLength(100, ErrorMessage = "Máximo 100 caracteres")]
+    //[Required(ErrorMessage = "Campo Nome obrigatório")]
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Defina um preço para o produto")]
