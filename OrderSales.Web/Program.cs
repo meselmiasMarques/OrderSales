@@ -21,5 +21,6 @@ builder.Services
 
 
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
 
 await builder.Build().RunAsync();

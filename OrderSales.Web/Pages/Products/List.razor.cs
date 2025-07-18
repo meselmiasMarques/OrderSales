@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using OrderSales.Core.Models;
 using OrderSales.Core.Requests.Products;
 using OrderSales.Core.Services;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 
 namespace OrderSales.Web.Pages.Products
@@ -25,6 +27,9 @@ namespace OrderSales.Web.Pages.Products
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
+        public ISnackbar Snackbar { get; set; } = null!;
 
         #endregion
         protected override async Task OnInitializedAsync()
@@ -54,16 +59,32 @@ namespace OrderSales.Web.Pages.Products
             }
         }
 
-        public void EditProduct(Guid id)
+        public async Task EditProduct(Guid id)
         {
-            // Redireciona para página de edição
-            // Exemplo: NavigationManager.NavigateTo($"/products/edit/{id}");
+           
         }
 
-        public void DeleteProduct(Guid id)
+        public async Task DeleteProduct(Guid id)
         {
-            // Lógica para exclusão
-            // Pode abrir um modal de confirmação
+            try
+            {
+                var request = new ProductDeleteRequest { Id = id };
+                var result = await ProductService.DeleteAsync(request);
+                if (result.IsSuccess)
+                {
+                    Products.RemoveAll(p => p.Id == id);
+                    Snackbar.Add(result.Message ?? "Produto excluído com sucesso !", Severity.Success);
+                }
+                else
+                {
+                    Snackbar.Add(result.Message ?? " Erro ao Excluir produtos", Severity.Error);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add(ex.Message, Severity.Error);
+            }
         }
 
         public void CreateProduct()

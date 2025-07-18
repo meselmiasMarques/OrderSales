@@ -1,0 +1,34 @@
+﻿@page "/customer/create"
+@inherits CreateCustomerPage
+
+<MudText Typo="Typo.h3">Novo cliente</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        
+        <MudTextField Label="Nome"
+                      For="@(() => InputModel.Name)"
+                      MaxLength="100"
+                      Immediate="true" />
+
+        <MudTextField Label="Endereço"
+                      For="@(() => InputModel.Address)"
+                      MaxLength="100"
+                      Immediate="true" />
+
+        <MudTextField Label="E-Mail"
+                      For="@(() => InputModel.Email)"
+                      MaxLength="100"
+                      Immediate="true" />
+
+        <MudTextField Label="Telefone"
+                      For="@(() => InputModel.Phone)"
+                      MaxLength="100"
+                      Immediate="true" />
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary">
+            Salvar
+        </MudButton>
+    </EditForm>
+</MudPaper>

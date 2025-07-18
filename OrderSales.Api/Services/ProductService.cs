@@ -81,8 +81,8 @@ namespace OrderSales.Api.Services
                 {
                     return new Response<Product?>(null, 404, "Produto não encontrado");
                 }
-
-                await _context.Products.Where(x => x.Id == request.Id).ExecuteDeleteAsync();
+                product.active = 0; // Set active to 0 to mark as inactive
+                _context.Products.Update(product);
                 await _context.SaveChangesAsync();
                 return new Response<Product?>(null, 200, "Produto excluído com sucesso");
             }

@@ -1,0 +1,52 @@
+﻿@page "/customer/list"
+@inherits ListCustomerPage
+
+
+<MudPaper Class="p-4" Elevation="1">
+
+    <MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4">
+        <MudText Typo="Typo.h5">📦 Lista de Clientes</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Add" OnClick="@CreateCustomer">
+            Novo Cliente
+        </MudButton>
+    </MudStack>
+
+    @if (Customers is null)
+    {
+        <MudProgressCircular Indeterminate Color="Color.Primary" />
+        <MudText Class="mt-2">🔄 Carregando clientes...</MudText>
+    }
+    else if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <MudAlert Severity="Severity.Error">@ErrorMessage</MudAlert>
+    }
+    else if (Customers.Any())
+    {
+        <MudTable Items="Customers" Elevation="0" Dense="true" Hover="true" Bordered="true">
+            <HeaderContent>
+                <MudTh>Nome</MudTh>
+                <MudTh>Endereço</MudTh>
+                <MudTh>Email</MudTh>
+                <MudTh>Telefone</MudTh>
+
+                <MudTh align="right">Ações</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.Address</MudTd>
+                <MudTd>@context.Email</MudTd>
+                <MudTd>@context.Phone</MudTd>
+
+                <MudTd Align="Right">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditCustomer(context.Id))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteCustomer(context.Id))" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+    else
+    {
+        <MudText Color="Color.Warning">⚠️ Nenhum cliente encontrado.</MudText>
+    }
+
+</MudPaper>

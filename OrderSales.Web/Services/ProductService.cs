@@ -24,8 +24,8 @@ namespace OrderSales.Web.Services
         {
             var result = await _client.DeleteAsync($"v1/products/{request.Id}");
 
-            //implemntar o retorno correto
-            throw new NotImplementedException();
+           return await result.Content.ReadFromJsonAsync<Response<Product?>>()
+                   ?? new Response<Product?>(null, 400, "Falha ao deletar o produto");
         }
 
         public async Task<Response<List<Product>?>> GetAllAsync(ProductGetAllRequest request)

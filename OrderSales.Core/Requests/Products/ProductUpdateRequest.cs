@@ -15,4 +15,6 @@ public class ProductUpdateRequest
 
     [Required(ErrorMessage = "Campo Estoque obrigatório")]
     public int Stock { get; set; }
+
+    public int Active { get; set; } = 1; // Default to active (1)
 }
