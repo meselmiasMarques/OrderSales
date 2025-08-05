@@ -33,8 +33,8 @@ namespace OrderSales.Api.EndPoints.Customers
             var result = await CustomerService.UpdateAsync(customer);
 
             return result.IsSuccess
-                ? TypedResults.Ok(result.Data)
-                : TypedResults.BadRequest(result.Data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OrderSales.Core.Models;
 using OrderSales.Core.Requests.Customers;
+using OrderSales.Core.Requests.Products;
 using OrderSales.Core.Responses;
 using OrderSales.Core.Services;
 using System.Net.Http.Json;
@@ -28,7 +29,7 @@ namespace OrderSales.Web.Services
 
         public async Task<Response<List<Customer>?>> GetAllAsync(CustomerGetAllRequest request)
             => await _client.GetFromJsonAsync<Response<List<Customer>?>>("v1/customers") ??
-                new Response<List<Customer>?>(null, 400, "Não foi possivel listar clientes");
+              new Response<List<Customer>?> (null, 400, "Não foi possivel listar clientes");
 
         public async Task<Response<Customer?>> GetByIdAsync(CustomerGetByIdRequest request)
         {

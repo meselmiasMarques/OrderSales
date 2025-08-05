@@ -1,0 +1,107 @@
+﻿@page "/order/create/{CustomerId:guid}"
+@inherits CreateOrderPage
+
+<MudText Typo="Typo.h4">Novo Pedido</MudText>
+ <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
+  <MudButton OnClick="@ToggleHeader">Cabeçalho</MudButton>
+    <MudButton OnClick="@ToggleItems">Itens</MudButton>
+    <MudButton OnClick="@ToggleSummary">Resumo</MudButton>
+</MudButtonGroup>
+<MudPaper Class="pa-12 mt-6">
+
+   @if (ShowHeaderSection)
+    {
+         @if (InputModel?.Customer is not null)
+        {
+            <MudTextField Label="Código cliente"
+                          @bind-Value="InputModel.Customer.Id"
+                          For="@(() => InputModel.Customer.Id)"
+                          Immediate="true" 
+                          Disabled=true />
+
+            <MudTextField Label="Nome cliente"
+                          @bind-Value="InputModel.Customer.Name"
+                          Disabled=true />
+
+                          <MudTextField Label="Endereço"
+                          @bind-Value="InputModel.Customer.Address"
+                          Disabled=true />
+
+        }
+        else
+        {
+            <MudProgressCircular Indeterminate />
+        }
+    }
+
+
+    @if (ShowItemsSection)
+    {
+        @if (Products is null)
+    {
+        <MudProgressCircular Indeterminate Color="Color.Primary" />
+        <MudText Class="mt-2">🔄 Carregando produtos...</MudText>
+    }
+    
+    else if (Products.Any())
+    {
+        <MudTable Items="Products" Elevation="0" Dense="true" Hover="true" Bordered="true">
+            <HeaderContent>
+                <MudTh>Nome</MudTh>
+                <MudTh>Preço (R$)</MudTh>
+                <MudTh>Quantidade</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.Price.ToString("C")</MudTd>
+                 <MudTd Style="width: 120px; display: flex; align-items: center;">
+                    <MudIconButton Icon="@Icons.Material.Filled.Remove"
+                                   Disabled="@(ProductQuantities[context.Id] == 0)"
+                                   OnClick="@(() => DecreaseQuantity(context.Id))"
+                                   Color="Color.Primary" />
+
+                    <MudText Class="mx-2">@ProductQuantities[context.Id]</MudText>
+
+                    <MudIconButton Icon="@Icons.Material.Filled.Add"
+                                   OnClick="@(() => IncreaseQuantity(context.Id))"
+                                   Color="Color.Primary" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+    else
+    {
+        <MudText Color="Color.Warning">⚠️ Nenhum produto encontrado.</MudText>
+    }
+
+    }
+
+     
+    @if (ShowSummarySection)
+    {
+          @if (InputModel?.Customer is not null)
+        {
+            <MudTextField Label="Código cliente"
+                          @bind-Value="InputModel.Customer.Id"
+                          For="@(() => InputModel.Customer.Id)"
+                          Immediate="true" 
+                          Disabled=true />
+
+            <MudTextField Label="Nome cliente"
+                          @bind-Value="InputModel.Customer.Name"
+                          Disabled=true />
+
+                          <MudTextField Label="Endereço"
+                          @bind-Value="InputModel.Customer.Address"
+                          Disabled=true />
+
+                         
+        }
+        else
+        {
+            <MudProgressCircular Indeterminate />
+        }
+    }
+
+  
+</MudPaper>

@@ -69,7 +69,7 @@ namespace OrderSales.Api.Services
                 return new Response<Product?>(null, 404, "Produto não encontrado ");
             }
 
-            return new Response<Product?>(product, 200, "");
+            return new Response<Product?>(product, 200);
         }
 
         public async Task<Response<Product?>> DeleteAsync(ProductDeleteRequest request)

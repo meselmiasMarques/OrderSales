@@ -20,23 +20,23 @@ public class CreateCustomerEndPoint : IEndPoint
 
     private static async Task<IResult> ServiceAsync(
         ICustomerService CustomerService,
-        [FromBody] CustomerCreateRequest request
+        CustomerCreateRequest request
     )
     {
-        var validationResults = new List<ValidationResult>();
-        var validationContext = new ValidationContext(request);
+        //var validationResults = new List<ValidationResult>();
+        //var validationContext = new ValidationContext(request);
 
-        if (!Validator.TryValidateObject(request, validationContext, validationResults, true))
-        {
-            var errors = validationResults.Select(vr => vr.ErrorMessage);
-            return Results.BadRequest(new { Errors = errors });
-        }
+        //if (!Validator.TryValidateObject(request, validationContext, validationResults, true))
+        //{
+        //    var errors = validationResults.Select(vr => vr.ErrorMessage);
+        //    return Results.BadRequest(new { Errors = errors });
+        //}
 
 
         var result = await CustomerService.CreateAsync(request);
 
         return result.IsSuccess
-            ? TypedResults.Created($"{result.Data?.Id}",result.Data)
-            : TypedResults.BadRequest(result.Data);
+            ? TypedResults.Created($"{result.Data?.Id}",result)
+            : TypedResults.BadRequest(result);
     }
 }

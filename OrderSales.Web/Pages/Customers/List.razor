@@ -38,8 +38,20 @@
                 <MudTd>@context.Phone</MudTd>
 
                 <MudTd Align="Right">
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditCustomer(context.Id))" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteCustomer(context.Id))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart"
+                                   Color="Color.Tertiary"
+                                   Href="@($"/order/create/{context.Id}")" 
+                                   />
+                    
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Primary"
+                                   Href="@($"/customer/edit/{context.Id}")" />
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Delete" 
+                        Color="Color.Error" 
+                        OnClick="@(() => DeleteCustomer(context.Id))"
+                        />
                 </MudTd>
             </RowTemplate>
         </MudTable>

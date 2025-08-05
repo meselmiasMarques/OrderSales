@@ -4,11 +4,13 @@
     "Projects": [
       {
         "Path": "OrderSales.Api\\OrderSales.Api.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "OrderSales.Api"
       },
       {
         "Path": "OrderSales.Web\\OrderSales.Web.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "OrderSales.Web"
       }
     ]
   }

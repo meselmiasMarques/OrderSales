@@ -39,6 +39,7 @@ namespace OrderSales.Web.Pages.Customers
                 if (result.IsSuccess)
                 {
                     Customers = result.Data ?? [];
+                    Console.WriteLine(result.Data);
                 }
                 else
                 {
@@ -58,7 +59,7 @@ namespace OrderSales.Web.Pages.Customers
 
         public async Task EditCustomer(Guid id)
         {
-
+            
         }
 
         public async Task DeleteCustomer(Guid id)
@@ -66,17 +67,10 @@ namespace OrderSales.Web.Pages.Customers
             try
             {
                 var request = new CustomerDeleteRequest { Id = id };
-                var result = await CustomerService.DeleteAsync(request);
-                if (result.IsSuccess)
-                {
+                 await CustomerService.DeleteAsync(request);
+               
                     Customers.RemoveAll(p => p.Id == id);
-                    Snackbar.Add(result.Message ?? "cliente excluído com sucesso !", Severity.Success);
-                }
-                else
-                {
-                    Snackbar.Add(result.Message ?? " Erro ao Excluir clientes", Severity.Error);
-
-                }
+                    Snackbar.Add("cliente excluído com sucesso !", Severity.Success);
             }
             catch (Exception ex)
             {

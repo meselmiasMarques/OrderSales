@@ -1,7 +1,6 @@
-﻿@page "/customer/create"
-@inherits CreateCustomerPage
+﻿@page "/customer/edit/{id}"
+@inherits EditCustomerPage 
 
-<MudText Typo="Typo.h3">Novo cliente</MudText>
 <MudPaper Class="pa-8 mt-4">
     <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
         <DataAnnotationsValidator />
@@ -32,11 +31,13 @@
         <MudTextField Label="Telefone"
                       @bind-Value="InputModel.Phone"
                       For="@(() => InputModel.Phone)"
-                      
                       Immediate="true" />
         <ValidationMessage For="@(() => InputModel.Phone)" />
 
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit">
+        <MudButton 
+            Variant="Variant.Filled" 
+            Color="Color.Primary" 
+            ButtonType="ButtonType.Submit">
             Salvar
         </MudButton>
     </EditForm>

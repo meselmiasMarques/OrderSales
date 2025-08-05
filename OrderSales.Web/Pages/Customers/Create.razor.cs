@@ -12,7 +12,6 @@ namespace OrderSales.Web.Pages.Customers
         #region PROPRIEDADES
 
         public CustomerCreateRequest InputModel { get; set; } = new();
-
         public bool IsLoading = true;
 
         public MudForm _form = default!;

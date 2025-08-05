@@ -35,8 +35,9 @@ namespace OrderSales.Web.Services
         public async Task<Response<Product?>> GetByIdAsync(ProductGetByIdRequest request)
         {
             var result = await _client.GetFromJsonAsync<Response<Product?>>($"v1/products/{request.Id}");
-            //implemntar o retorno correto
-            throw new NotImplementedException();
+
+            return result ?? new Response<Product?>(null, 400, "Produto não encontrado");
+
         }
 
         public async Task<Response<Product?>> UpdateAsync(ProductUpdateRequest request)

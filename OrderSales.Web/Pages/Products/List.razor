@@ -34,7 +34,10 @@
                 <MudTd>@context.Price.ToString("C")</MudTd>
                 <MudTd>@context.Stock</MudTd>
                 <MudTd Align="Right">
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditProduct(context.Id))" />
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Primary"
+                                   Href="@($"/product/edit/{context.Id}")" />
                     <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteProduct(context.Id))" />
                 </MudTd>
             </RowTemplate>

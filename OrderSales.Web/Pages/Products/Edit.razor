@@ -1,0 +1,43 @@
+﻿@page "/product/edit/{id}"
+@inherits EditProductPage
+
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <MudTextField Label="Nome"
+                      @bind-Value="InputModel.Name"
+                      For="@(() => InputModel.Name)"
+                      Required="true"
+                      MaxLength="100"
+                      Immediate="true" />
+        <ValidationMessage For="@(() => InputModel.Name)" />
+
+        <MudNumericField T="decimal"
+                         Label="Preço (R$)"
+                         @bind-Value="InputModel.Price"
+                         For="@(() => InputModel.Price)"
+                         Required="true"
+                         Adornment="Adornment.Start"
+                         AdornmentText="R$" Class="mt-3" />
+        <ValidationMessage For="@(() => InputModel.Price)" />
+
+
+        <MudNumericField T="int"
+                         Label="Estoque"
+                         @bind-Value="InputModel.Stock"
+                         For="@(() => InputModel.Stock)"
+                         Required="true"
+                         Class="mt-3"
+                         Max="9999" />
+        <ValidationMessage For="@(() => InputModel.Stock)" />
+
+        <MudButton 
+            Variant="Variant.Filled"
+            Color="Color.Primary"
+            ButtonType="ButtonType.Submit">
+            Salvar
+        </MudButton>
+    </EditForm>
+</MudPaper>

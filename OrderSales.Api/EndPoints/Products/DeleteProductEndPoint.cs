@@ -24,8 +24,8 @@ namespace OrderSales.Api.EndPoints.Products
             };
             var result = await ProductService.DeleteAsync(request);
             return result.IsSuccess
-                ? TypedResults.NoContent()
-                : TypedResults.BadRequest(result.Data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

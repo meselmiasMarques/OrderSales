@@ -28,8 +28,8 @@ namespace OrderSales.Api.EndPoints.Customers
             var result = await CustomerService.DeleteAsync(request);
 
             return result.IsSuccess
-                ? TypedResults.NoContent()
-                : TypedResults.BadRequest(result.Data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

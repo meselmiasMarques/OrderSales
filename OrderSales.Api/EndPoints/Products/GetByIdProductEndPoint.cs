@@ -13,7 +13,7 @@ namespace OrderSales.Api.EndPoints.Products
             app.MapGet("/{id}", ServiceAsync)
                 .WithName("Products : GetById")
                 .WithSummary("Lista  produto por ID")
-                .WithOrder(3)
+                .WithOrder(4)
                 .Produces<Response<Product?>>();
         }
 
@@ -29,8 +29,8 @@ namespace OrderSales.Api.EndPoints.Products
             var result = await ProductService.GetByIdAsync(request);
 
             return result.IsSuccess
-                ? TypedResults.Ok(result.Data)
-                : TypedResults.BadRequest(result.Data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }
