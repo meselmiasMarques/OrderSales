@@ -1,7 +1,7 @@
 ﻿@page "/order/create/{CustomerId:guid}"
 @inherits CreateOrderPage
 
-<MudText Typo="Typo.h4">Novo Pedido</MudText>
+<MudText Typo="Typo.h4">@InputModel.Customer.Name</MudText>
  <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
   <MudButton OnClick="@ToggleHeader">Cabeçalho</MudButton>
     <MudButton OnClick="@ToggleItems">Itens</MudButton>
@@ -60,7 +60,7 @@
                                    OnClick="@(() => DecreaseQuantity(context.Id))"
                                    Color="Color.Primary" />
 
-                    <MudText Class="mx-2">@ProductQuantities[context.Id]</MudText>
+                    <MudText Class="mx-2">@context.Amount</MudText>
 
                     <MudIconButton Icon="@Icons.Material.Filled.Add"
                                    OnClick="@(() => IncreaseQuantity(context.Id))"
@@ -81,21 +81,28 @@
     {
           @if (InputModel?.Customer is not null)
         {
-            <MudTextField Label="Código cliente"
-                          @bind-Value="InputModel.Customer.Id"
-                          For="@(() => InputModel.Customer.Id)"
-                          Immediate="true" 
-                          Disabled=true />
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <MudTextField Label="Código cliente"
+                              @bind-Value="InputModel.Customer.Id"
+                              For="@(() => InputModel.Customer.Id)"
+                              Immediate="true" 
+                              Disabled=true />
 
-            <MudTextField Label="Nome cliente"
-                          @bind-Value="InputModel.Customer.Name"
-                          Disabled=true />
+                <MudTextField Label="Nome cliente"
+                              @bind-Value="InputModel.Customer.Name"
+                              Disabled=true />
 
-                          <MudTextField Label="Endereço"
-                          @bind-Value="InputModel.Customer.Address"
-                          Disabled=true />
+                <MudTextField Label="Endereço"
+                              @bind-Value="InputModel.Customer.Address"
+                              Disabled=true />
 
-                         
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary">
+                    Salvar
+                </MudButton>
+                          
+            </EditForm>
         }
         else
         {

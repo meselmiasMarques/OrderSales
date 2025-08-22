@@ -10,5 +10,8 @@ public class Product
     public int Stock { get; set; }
 
     [JsonIgnore]
+    public int Amount { get; set; }
+
+    [JsonIgnore]
     public int active { get; set; } = 1; // 1 for active, 0 for inactive
 }

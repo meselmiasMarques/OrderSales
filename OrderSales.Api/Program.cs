@@ -19,6 +19,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+// //angular
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowBlazorClient", policy =>
+//     {
+//         policy.WithOrigins("https://localhost:4200")
+//               .AllowAnyHeader()
+//               .AllowAnyMethod();
+//     });
+// });
+
 
 
 // Add services to the container.

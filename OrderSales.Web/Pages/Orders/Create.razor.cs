@@ -2,10 +2,11 @@
 using MudBlazor;
 using OrderSales.Core.Models;
 using OrderSales.Core.Requests.Customers;
+using OrderSales.Core.Requests.OrderItem;
 using OrderSales.Core.Requests.Orders;
 using OrderSales.Core.Requests.Products;
 using OrderSales.Core.Services;
-using System.Runtime.Serialization;
+
 
 namespace OrderSales.Web.Pages.Orders
 {
@@ -54,9 +55,31 @@ namespace OrderSales.Web.Pages.Orders
         #region Metodos
         public async Task OnValidSubmitAsync()
         {
+                          
+
+                // (2) Normaliza CustomerId sem NRE
+                if (InputModel.Customer != null)
+                    InputModel.CustomerId = InputModel.Customer.Id;
+
+                // (3) Monta o request já filtrando itens inválidos (equivalente ao RemoveAll)
+                var request = new OrderCreateRequest
+                {
+                    CustomerId = InputModel.Customer?.Id ?? InputModel.CustomerId,
+                    OrderItems = (Products ?? Enumerable.Empty<Product>())
+                        .Where(p => p.Amount > 0) 
+                        .Select(p => new OrderItemCreateRequest
+                        {
+                            ProductId = p.Id,
+                            Amount = p.Amount
+                        })
+                        .ToList()
+                };
+            
+          
             try
             {
-                var result = await OrderService.CreateAsync(InputModel);
+               
+                var result = await OrderService.CreateAsync(request);
                 if (result.IsSuccess)
                 {
                     NavigationManager.NavigateTo("/order/list");
@@ -180,16 +203,26 @@ namespace OrderSales.Web.Pages.Orders
 
         public void IncreaseQuantity(Guid productId)
         {
-            if (!ProductQuantities.ContainsKey(productId))
-                ProductQuantities[productId] = 0;
+            foreach (var item in Products) {
+                if (item.Id == productId)
+                {
+                    item.Amount++;
+                }
+            }
 
-            ProductQuantities[productId]++;
+
+                
         }
 
         public void DecreaseQuantity(Guid productId)
         {
-            if (ProductQuantities.ContainsKey(productId) && ProductQuantities[productId] > 0)
-                ProductQuantities[productId]--;
+            foreach (var item in Products)
+            {
+                if (item.Id == productId)
+                {
+                    item.Amount--;
+                }
+            }
         }
 
 
